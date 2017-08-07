@@ -12,8 +12,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
     public void sendMessage(View v){
-        Requester requester = new Requester();
-        requester.sendHttpRequest();
+        Requester requester = new Requester("https://api.github.com/");
+        CallbackEvent callbackEvent = new CallbackEvent(){
+                @Override
+                public void callbackMethod() {
+                }
+        };
+        requester.sendHttpRequest("organization_url", new EventRegistration(callbackEvent));
     }
 
 }
