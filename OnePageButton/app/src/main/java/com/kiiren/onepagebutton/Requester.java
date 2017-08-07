@@ -25,6 +25,7 @@ public class Requester {
         this.dest = URL;
     }
     private boolean Connect(){
+        if(myConnection != null) return true;
         try{/*HTTP 연결 생성*/
             URL sendMessage = new URL(dest);
             myConnection = (HttpsURLConnection) sendMessage.openConnection();
@@ -96,12 +97,22 @@ public class Requester {
         });
         return true;
     }
-    private boolean setRequestMethod(String method){
-        if(myConnection == null) return false;
-        try {
-            myConnection.setRequestMethod(method);
+    public boolean postHttpRequest(final String desiredKey, final String desiredValue){
+        final String myData = desiredKey + "=" + desiredValue;
+        Connect();
+        try{
+            myConnection.setRequestMethod("POST");
         }
-        catch (ProtocolException e){
+        catch(ProtocolException e){
+        }
+// Enable writing
+        myConnection.setDoOutput(true);
+        try {
+// Write the data
+            myConnection.getOutputStream().write(myData.getBytes());
+        }
+        catch(IOException e){
+
         }
         return true;
     }
