@@ -57,6 +57,9 @@ public class MainActivity extends AppCompatActivity {
                                 jsonReader.skipValue(); // Skip values of other keys
                             }
                         }
+                        /*리소스 해제, 연결 종료*/
+                        jsonReader.close();
+                        myConnection.disconnect();
                     } else {
                         // Error handling code goes here
                     }
