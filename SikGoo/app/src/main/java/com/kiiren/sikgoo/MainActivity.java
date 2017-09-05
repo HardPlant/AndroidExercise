@@ -92,6 +92,14 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    public void restCall(){
+        RestAdapter restAdapter = new RestAdapter.Builder()
+                .setEndpoint("https://api.github.com")
+                .build();
+        GitHubService service = restAdapter.create(GitHubService.class);
+    }
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
